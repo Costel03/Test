@@ -1,12 +1,30 @@
-ingress:
-  enabled: true
-  ingressClassName: nginx
-  hosts:
-    - nginx.local
-  tls:
-    - secretName: nginx-tls
-      hosts:
-        - nginx.local
+# values.yaml pentru nginx-app
+replicaCount: 1
+
+image:
+  repository: nginx
+  pullPolicy: IfNotPresent
+  tag: stable
+
+serviceAccount:
+  create: true
+  name: ""
+
+podAnnotations: {}
+
+podSecurityContext: {}
+securityContext: {}
+
+resources: {}
+autoscaling:
+  enabled: false
+  minReplicas: 1
+  maxReplicas: 100
+  targetCPUUtilizationPercentage: 80
+
+nodeSelector: {}
+tolerations: []
+affinity: {}
 
 service:
   type: LoadBalancer
@@ -17,3 +35,13 @@ service:
     - port: 443
       targetPort: 443
       name: https
+
+ingress:
+  enabled: true
+  ingressClassName: nginx
+  hosts:
+    - nginx.local
+  tls:
+    - secretName: nginx-tls
+      hosts:
+        - nginx.local
