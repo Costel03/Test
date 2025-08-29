@@ -25,19 +25,17 @@ nodeSelector: {}
 tolerations: []
 affinity: {}
 
-containerPorts:
-  - name: http
-    containerPort: 80
-    protocol: TCP
+# Portul containerului (folosit de Deployment)
+containerPort: 80
 
 service:
   type: LoadBalancer
   ports:
     - port: 80
-      targetPort: http
+      targetPort: 80
       name: http
     - port: 443
-      targetPort: https
+      targetPort: 443
       name: https
 
 ingress:
@@ -49,3 +47,4 @@ ingress:
     - secretName: nginx-tls
       hosts:
         - nginx.local
+
