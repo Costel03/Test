@@ -1,4 +1,3 @@
-# values.yaml pentru nginx-app
 replicaCount: 1
 
 image:
@@ -26,14 +25,19 @@ nodeSelector: {}
 tolerations: []
 affinity: {}
 
+containerPorts:
+  - name: http
+    containerPort: 80
+    protocol: TCP
+
 service:
   type: LoadBalancer
   ports:
     - port: 80
-      targetPort: 80
+      targetPort: http
       name: http
     - port: 443
-      targetPort: 443
+      targetPort: https
       name: https
 
 ingress:
