@@ -5,7 +5,7 @@ replicaCount: 1
 image:
   repository: grafana/grafana
   pullPolicy: IfNotPresent
-  tag: "11.1.0"   # ajustează la versiunea dorită
+  tag: "latest"   # ajustează la versiunea dorită
 
 imagePullSecrets: []
 nameOverride: ""
@@ -70,9 +70,9 @@ persistence:
 
 # Cont admin (dacă nu folosești secret extern)
 admin:
-  user: admin
-  password: CHANGEME   # schimbă sau folosește un Secret separat
-  existingSecret: ""   # ex: grafana-admin-secret
+  existingSecret: grafana-admin-secret
+  user: ""        # lasă gol când folosești Secret
+  password: ""    # lasă gol când folosești Secret
 
 volumes: []
 volumeMounts: []
