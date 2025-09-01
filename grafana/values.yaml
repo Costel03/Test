@@ -1,0 +1,82 @@
+# Default values for grafana.
+
+replicaCount: 1
+
+image:
+  repository: grafana/grafana
+  pullPolicy: IfNotPresent
+  tag: "11.1.0"   # ajustează la versiunea dorită
+
+imagePullSecrets: []
+nameOverride: ""
+fullnameOverride: ""
+
+serviceAccount:
+  create: true
+  automount: true
+  annotations: {}
+  name: ""
+
+podAnnotations: {}
+podLabels: {}
+
+podSecurityContext: {}
+securityContext: {}
+
+service:
+  type: ClusterIP
+  port: 3000
+
+ingress:
+  enabled: true
+  className: nginx
+  annotations:
+    nginx.ingress.kubernetes.io/ssl-redirect: "false"
+  hosts:
+    - host: grafana.local
+      paths:
+        - path: /
+          pathType: Prefix
+  tls: []   # dacă vrei HTTPS, configurează aici
+
+resources: {}
+  # limits:
+  #   cpu: 500m
+  #   memory: 512Mi
+  # requests:
+  #   cpu: 100m
+  #   memory: 256Mi
+
+livenessProbe:
+  httpGet:
+    path: /
+    port: http
+readinessProbe:
+  httpGet:
+    path: /
+    port: http
+
+autoscaling:
+  enabled: false
+  minReplicas: 1
+  maxReplicas: 100
+  targetCPUUtilizationPercentage: 80
+
+# Persistent storage pentru datele Grafana
+persistence:
+  enabled: true
+  size: 5Gi
+  storageClassName: ""   # setează dacă ai un SC (ex: longhorn, local-path)
+
+# Cont admin (dacă nu folosești secret extern)
+admin:
+  user: admin
+  password: CHANGEME   # schimbă sau folosește un Secret separat
+  existingSecret: ""   # ex: grafana-admin-secret
+
+volumes: []
+volumeMounts: []
+
+nodeSelector: {}
+tolerations: []
+affinity: {}
