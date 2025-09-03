@@ -1,0 +1,10 @@
+server:
+  persistentVolume:
+    enabled: true
+    size: 10Gi
+    storageClass: manual
+alertmanager:
+  persistentVolume:
+    enabled: true
+    size: 2Gi
+    storageClass: manual
