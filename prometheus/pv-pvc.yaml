@@ -1,0 +1,39 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: prometheus-pv
+spec:
+  capacity:
+    storage: 20Gi # Suficient pentru ambele
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: "" # Lăsat gol pentru a se lega manual
+  hostPath:
+    path: "/mnt/prometheus-data" # Asigură-te că directorul există pe nod
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: prometheus-server
+  namespace: monitoring
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 10Gi
+  storageClassName: "" # Lăsat gol pentru a se lega manual
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: storage-prometheus-alertmanager-0
+  namespace: monitoring
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 2Gi
+  storageClassName: ""
