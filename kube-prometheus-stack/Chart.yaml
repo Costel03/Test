@@ -6,8 +6,9 @@ annotations:
     - name: Upstream Project
       url: https://github.com/prometheus-operator/kube-prometheus
     - name: Upgrade Process
-      url: https://github.com/prometheus-community/helm-charts/blob/main/charts/kube-prometheus-stack/README.md#upgrading-chart
+      url: https://github.com/prometheus-community/helm-charts/blob/main/main/charts/kube-prometheus-stack/README.md#upgrading-chart
   artifacthub.io/operator: "true"
+  argocd.argoproj.io/sync-wave: "-1"
 apiVersion: v2
 appVersion: v0.85.0
 dependencies:
