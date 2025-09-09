@@ -1,0 +1,28 @@
+loki:
+  auth_enabled: false
+
+persistence:
+  enabled: true
+  accessModes:
+    - ReadWriteOnce
+  size: 10Gi
+  storageClassName: "" # Set to your storage class if needed
+
+resources:
+  requests:
+    cpu: 100m
+    memory: 256Mi
+  limits:
+    cpu: 500m
+    memory: 512Mi
+
+service:
+  type: ClusterIP
+  port: 3100
+
+ingress:
+  enabled: false
+
+# Enable if you want to use Promtail for log shipping
+promtail:
+  enabled: false
