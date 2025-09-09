@@ -1,5 +1,13 @@
+replicaCount: 1
+
 loki:
   auth_enabled: false
+  commonConfig:
+    replication_factor: 1
+  storage:
+    type: filesystem
+    filesystem:
+      directory: /var/loki/chunks
 
 persistence:
   enabled: true
@@ -23,6 +31,6 @@ service:
 ingress:
   enabled: false
 
-# Enable if you want to use Promtail for log shipping
+# If you want to deploy promtail as well, set enabled to true
 promtail:
   enabled: false
