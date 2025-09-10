@@ -32,7 +32,7 @@ spec:
         - name: config
           mountPath: /etc/loki
         - name: storage
-          mountPath: /data
+          mountPath: /data/loki   # <-- FIXED HERE
       volumes:
       - name: config
         secret:
