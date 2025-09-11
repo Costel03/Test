@@ -1,3 +1,11 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:   # permite și rulare manuală
+
 jobs:
   call-reusable:
     uses: ./.github/workflows/build-test-deploy.yml
