@@ -8,6 +8,6 @@ on:
 
 jobs:
   call-reusable:
-    uses: ./github/workflows/build-test-deploy.yml
+    uses: ./.github/workflows/build-test-deploy.yml
     with:
       environment: staging
