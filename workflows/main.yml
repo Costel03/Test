@@ -1,0 +1,13 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+jobs:
+  call-reusable:
+    uses: Costel03/Test/.github/workflows/build-test-deploy.yml@main
+    with:
+      environment: staging
