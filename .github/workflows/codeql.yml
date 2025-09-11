@@ -1,0 +1,61 @@
+name: "CodeQL Advanced"
+
+on:
+  workflow_dispatch:   # rulează doar manual
+    inputs:
+      languages:
+        description: 'Select languages to analyze'
+        required: false
+        default: 'javascript,python'
+  # Fără push sau pull_request
+
+jobs:
+  analyze:
+    name: Analyze (${{ matrix.language }})
+    runs-on: ${{ (matrix.language == 'swift' && 'macos-latest') || 'ubuntu-latest' }}
+    permissions:
+      security-events: write
+      packages: read
+      actions: read
+      contents: read
+
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - language: javascript
+            build-mode: manual
+          - language: python
+            build-mode: manual
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    # Setup runtime / compilers dacă e nevoie (opțional)
+    # - name: Setup Node.js
+    #   uses: actions/setup-node@v3
+    #   with:
+    #     node-version: '20'
+
+    - name: Initialize CodeQL
+      uses: github/codeql-action/init@v3
+      with:
+        languages: ${{ matrix.language }}
+        build-mode: ${{ matrix.build-mode }}
+        # queries: security-extended,security-and-quality
+
+    # Dacă build-mode este manual, poți adăuga comenzi de build aici
+    - if: matrix.build-mode == 'manual'
+      shell: bash
+      run: |
+        echo 'Manual build mode activ. Adaugă comenzile tale de build aici.'
+        # exemplu:
+        # npm install
+        # pip install -r requirements.txt
+        exit 1
+
+    - name: Perform CodeQL Analysis
+      uses: github/codeql-action/analyze@v3
+      with:
+        category: "/language:${{ matrix.language }}"
