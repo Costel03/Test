@@ -15,7 +15,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
         with:
-          fetch-depth: 0      # ca să aibă tot history-ul
+          fetch-depth: 0
           ref: ${{ github.ref }}
 
       - name: Setup Node.js (example)
