@@ -25,9 +25,7 @@ nodeSelector: {}
 tolerations: []
 affinity: {}
 
-# Nu defini liste separate de containerPorts (ar putea duce la dubluri).
-# Majoritatea chart-urilor Nginx își extrag containerPort din service.targetPort (așteaptă numere).
-# Dacă chart-ul tău cere explicit containerPort, folosește o singură valoare numerică:
+
 containerPort: 80
 
 service:
@@ -35,11 +33,11 @@ service:
   ports:
     - name: http
       port: 80
-      targetPort: 80    # numeric — important (nu "http")
+      targetPort: 80    
       protocol: TCP
     - name: https
       port: 443
-      targetPort: 443   # numeric
+      targetPort: 443
       protocol: TCP
 
 ingress:
