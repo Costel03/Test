@@ -1,11 +1,9 @@
-# Default values for grafana.
-
 replicaCount: 1
 
 image:
   repository: grafana/grafana
   pullPolicy: IfNotPresent
-  tag: "latest"   # ajustează la versiunea dorită
+  tag: "latest"   
 
 imagePullSecrets: []
 nameOverride: ""
@@ -37,7 +35,7 @@ ingress:
       paths:
         - path: /
           pathType: Prefix
-  tls: []   # dacă vrei HTTPS, configurează aici
+  tls: [] 
 
 resources: {}
   # limits:
@@ -62,17 +60,15 @@ autoscaling:
   maxReplicas: 100
   targetCPUUtilizationPercentage: 80
 
-# Persistent storage pentru datele Grafana
 persistence:
   enabled: true
   size: 5Gi
-  storageClassName: ""   # setează dacă ai un SC (ex: longhorn, local-path)
+  storageClassName: "" 
 
-# Cont admin (dacă nu folosești secret extern)
 admin:
   existingSecret: grafana-admin-secret
-  user: ""        # lasă gol când folosești Secret
-  password: ""    # lasă gol când folosești Secret
+  user: ""        
+  password: ""   
 
 volumes: []
 volumeMounts: []

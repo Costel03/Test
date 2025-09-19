@@ -1,12 +1,12 @@
 name: "CodeQL Manual Analysis"
 
 on:
-  workflow_dispatch:  # Permite rularea manuală a workflow-ului
+  workflow_dispatch: #run manually
 
 jobs:
   analyze:
     name: Analyze CodeQL
-    runs-on: ubuntu-latest  # Poți schimba cu 'macos-latest' sau 'windows-latest' dacă este necesar
+    runs-on: ubuntu-latest  #runner
 
     permissions:
       security-events: write
@@ -20,8 +20,8 @@ jobs:
       - name: Set up CodeQL
         uses: github/codeql-action/init@v3
         with:
-          languages: 'javascript'  # Schimbă cu limbajul tău, de exemplu 'python', 'go', etc.
-          build-mode: 'none'  # Folosește 'autobuild' sau 'manual' dacă este necesar
+          languages: 'javascript'  
+          build-mode: 'none'  
 
       - name: Autobuild
         uses: github/codeql-action/autobuild@v3
